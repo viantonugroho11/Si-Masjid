@@ -173,26 +173,28 @@ Route::get('/profil-member',function(){
 });
 
 
-//Route Resource Controller untuk menampilkan data
-Route::resource('datapengurus', PengurusController::class);
-Route::resource('inventaris', InventarisController::class);
-Route::resource('dokumentasi', DokumentasiController::class);
-Route::resource('kampanye', KampanyeController::class);
-Route::resource('pemasukan', PemasukanController::class);
-Route::resource('pengeluaran', PengeluaranController::class);
-Route::resource('ziskampanye', ZisKampanyeController::class);
-Route::resource('program', ProgramController::class);
-Route::resource('profilmasjid', ProfilMasjidController::class);
-Route::resource('laporankegiatan', LaporanKegiatanController::class);
-Route::resource('laporanzis', LaporanController::class);
-Route::resource('shohibulzis', ShohibulZisController::class);
-Route::resource('galeri', GaleriController::class);
-Route::resource('riwayat', RiwayatController::class);
-Route::resource('salur', SalurController::class);
-Route::resource('pemasukan/jenis', JenisPemasukanController::class);
-Route::resource('program-kegiatan', ProgramKegiatanController::class);
-Route::resource('profilmember', ProfilMemberController::class);
-Route::resource('editpassword', EditPasswordController::class);
+Route::middleware('auth')->group(function () {
+    //Route Resource Controller untuk menampilkan data
+    Route::resource('datapengurus', PengurusController::class);
+    Route::resource('inventaris', InventarisController::class);
+    Route::resource('dokumentasi', DokumentasiController::class);
+    Route::resource('kampanye', KampanyeController::class);
+    Route::resource('pemasukan', PemasukanController::class);
+    Route::resource('pengeluaran', PengeluaranController::class);
+    Route::resource('ziskampanye', ZisKampanyeController::class);
+    Route::resource('program', ProgramController::class);
+    Route::resource('profilmasjid', ProfilMasjidController::class);
+    Route::resource('laporankegiatan', LaporanKegiatanController::class);
+    Route::resource('laporanzis', LaporanController::class);
+    Route::resource('shohibulzis', ShohibulZisController::class);
+    Route::resource('galeri', GaleriController::class);
+    Route::resource('riwayat', RiwayatController::class);
+    Route::resource('salur', SalurController::class);
+    Route::resource('pemasukan/jenis', JenisPemasukanController::class);
+    Route::resource('program-kegiatan', ProgramKegiatanController::class);
+    Route::resource('profilmember', ProfilMemberController::class);
+    Route::resource('editpassword', EditPasswordController::class);
+});
 
 //Route Edit Controller
 Route::get('/datapengurus/edit',function(){
