@@ -12,7 +12,7 @@ class ProgramKegiatan extends Model
      * fillable
      *
      * @var array
-     */
+     */ 
     protected $fillable = [
         'nama_kegiatan',
         'hari_kegiatan',

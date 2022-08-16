@@ -6,7 +6,9 @@ use App\Http\Controllers\Backend\Kampanye\KampanyeController;
 use App\Http\Controllers\Controller;
 use App\Models\DataKampanye;
 use App\Models\Transaksi;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Midtrans\Midtrans;
 
 class MidtransController extends Controller
@@ -14,7 +16,33 @@ class MidtransController extends Controller
     public function store(Request $request)
     {
 
+        if(Auth::check()==false){
+            return redirect('/login-member');
+        }
+
         $idZis = $request->id_zis;
+        $kampaye = DataKampanye::find($idZis);
+        $nameKG="";
+        if($kampaye->kategori == 'Zakat'){
+            $nameKG = 'ZKT';
+        }elseif($kampaye->kategori == 'Infaq'){
+            $nameKG = 'INF';
+        }else{
+            $nameKG = 'SDQ';
+        }
+        $tanggal = date('ymd');
+        $no = "0000";
+        $nourut = Transaksi::max('order_id');
+        $cektanggal = substr($nourut, 0, 6);
+        $hasil_urut = $tanggal . $no;
+        $hasil = "";
+        if ($tanggal == $cektanggal) {
+            $hasil = $nourut + 1;
+        } else {
+            $hasil = $hasil_urut + 1;
+        }
+        $orderid = $nameKG . $hasil;
+
         $harga = $request->harga;
         $jumlah = $request->jumlah;
         $total= $harga * $jumlah;
@@ -31,20 +59,20 @@ class MidtransController extends Controller
         \Midtrans\Config::$is3ds = true;
 
         $customer_details = array(
-            'first_name'    => "Dimas",
+            'first_name'    => Auth::user()->name,
             // 'last_name'     => "Litani",
-            'email'         => "dwp1725@gmail.com"
+            'email'         => Auth::user()->email,
             // 'phone'         => "081122334455"
             // 'billing_address'  => $billing_address,
             // 'shipping_address' => $shipping_address
         );
 
-        $kategoriId = array(
-            'merchant_id'=>$kategori_id
-        );
+        // $kategoriId = array(
+        //     'merchant_id'=>$kategori_id
+        // );
 
         $transaction_details = array(
-            'order_id' => "7",
+            'order_id' => $orderid,
             'gross_amount' => $total // no decimal allowed for creditcard
         );
 
@@ -57,7 +85,7 @@ class MidtransController extends Controller
 
         Transaksi::create([
             'transaction_id'=>"0",
-            'order_id'=>"7",
+            'order_id'=>$orderid,
             'payment_type'=>"0",
             'id_user'=>Auth::user()->id,
             'id_zis'=>$idZis,
@@ -98,7 +126,7 @@ class MidtransController extends Controller
             }
         }
         // dd($jumlah);
-        $transaksi = Transaksi::where('order_id','=',$order_id)->first();
+        $transaksi = Transaksi::where('order_id','=',$orderId)->first();
         $transaksi->update([
             'transaction_id'=>$id_transaksi,
             'payment_type'=>$tipe,

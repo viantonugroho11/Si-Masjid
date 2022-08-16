@@ -29,7 +29,7 @@
                                     <tbody>
                                         @forelse ($riwayats as $item)
                                         <tr>
-                                            <td>{{ $item->order_id }}</td>
+                                            <td>{{ $item->getuser->name }}</td>
                                             <td>{{ $item->merchant_id }}</td>
                                             <td>{{ $item->amount }}</td>
                                             <td>{{ $item->gross_amount }}</td>

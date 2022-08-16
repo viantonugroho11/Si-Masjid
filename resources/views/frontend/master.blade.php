@@ -11,6 +11,9 @@
     <!-- Favicon -->
     <link href="{{ asset('assets/frontend/img/favicon.ico') }}" rel="icon">
 
+
+     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+     
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,6 +60,7 @@
     <script src="{{ asset('assets/frontend/lib/waypoints/waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/lib/counterup/counterup.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>

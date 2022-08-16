@@ -16,7 +16,8 @@ class RiwayatController extends Controller
     public function index()
     {
         //
-        $riwayats = Transaksi::all();
+        $riwayats = Transaksi::with('getuser')->with('getzis')->get();
+        // dd($riwayats);
         return view('backend.datatable_riwayattransaksi.index', compact('riwayats'));
     }
 
@@ -39,7 +40,7 @@ class RiwayatController extends Controller
     public function store(Request $request)
     {
         //
-        
+
     }
 
     /**

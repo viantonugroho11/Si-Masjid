@@ -44,9 +44,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('backend.home.index');
 // });
 //Pengambilan data dari controller lain
-Route::middleware(['Member'])->group(function () {
-    Route::post('/transaksi',[App\Http\Controllers\Config\MidtransController::class,'store'])->name('transaksi.midtrans');
+Route::post('/transaksi',[App\Http\Controllers\Config\MidtransController::class,'store'])->name('transaksi.midtrans');
+Route::middleware(['Member','auth'])->group(function () {
+    // Route::get('/ziskampanye',[ZisKampanyeController::class,'index'])->name('ziskampanye.index');
+    // Route::get('/ziskampanye/{id}',[ZisKampanyeController::class,'show'])->name('ziskampanye.show');
 });
+Route::resource('ziskampanye', ZisKampanyeController::class);
 Route::get('/dashboard',[App\Http\Controllers\Backend\Home\HomeController::class,'index'])->name('dashboard.index');
 Route::get('/zis',[App\Http\Controllers\Frontend\ZisKampanye\ZisKampanyeController::class,'index'])->name('ziskampanye.index');
 Route::get('/',[App\Http\Controllers\Frontend\Program\ProgramController::class,'index'])->name('program.index');
@@ -181,7 +184,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('kampanye', KampanyeController::class);
     Route::resource('pemasukan', PemasukanController::class);
     Route::resource('pengeluaran', PengeluaranController::class);
-    Route::resource('ziskampanye', ZisKampanyeController::class);
+
     Route::resource('program', ProgramController::class);
     Route::resource('profilmasjid', ProfilMasjidController::class);
     Route::resource('laporankegiatan', LaporanKegiatanController::class);
@@ -224,3 +227,4 @@ Route::get('send-mail', function () {
     dd("Email is Sent.");
 });
 
+Route::get('/transaksi/finish', [App\Http\Controllers\Config\MidtransController::class, 'finish'])->name('transaksi.finish');

@@ -29,4 +29,13 @@ class Transaksi extends Model
         'id_user',
         'id_zis'
     ];
+
+    public function getuser()
+    {
+        return $this->belongsTo(User::class,'id_user','id');
+    }
+    public function getzis()
+    {
+        return $this->belongsTo(DataKampanye::class,'id_zis','id');
+    }
 }

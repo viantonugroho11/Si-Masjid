@@ -84,7 +84,7 @@ class ProfilMemberController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'alamat_lengkap' => $request->alamat_lengkap,
-                'jenis_keamin' => $request->jenis_keamin,
+                'jenis_kelamin' => $request->jenis_kelamin,
                 'nomor_telepon' => $request->nomor_telepon
             ]);
         }else{
@@ -97,7 +97,7 @@ class ProfilMemberController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'alamat_lengkap' => $request->alamat_lengkap,
-                'jenis_keamin' => $request->jenis_keamin,
+                'jenis_kelamin' => $request->jenis_kelamin,
                 'nomor_telepon' => $request->nomor_telepon,
                 'foto_profil' => $fotoprofil->hashName()
             ]);
@@ -122,5 +122,5 @@ class ProfilMemberController extends Controller
     {
         //
     }
-
+    
 }
