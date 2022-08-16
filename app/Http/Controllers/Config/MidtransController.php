@@ -34,14 +34,16 @@ class MidtransController extends Controller
         $tanggal = date('ymd');
         $no = "0000";
         $nourut = Transaksi::max('order_id');
-        $cektanggal = substr($nourut, 0, 6);
+        $cektanggal = substr($nourut, 3, 6);
+        // dd($cektanggal);
         $hasil_urut = $tanggal . $no;
-        $hasil = "";
         if ($tanggal == $cektanggal) {
-            $hasil = $nourut + 1;
+            $no_urut = substr($nourut, 3, 10) + 1;
+            $hasil = $no_urut + 1;
         } else {
             $hasil = $hasil_urut + 1;
         }
+        // dd($hasil);
         $orderid = $nameKG . $hasil;
 
         $harga = $request->harga;
