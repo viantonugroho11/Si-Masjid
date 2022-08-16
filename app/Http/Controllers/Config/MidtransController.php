@@ -48,7 +48,7 @@ class MidtransController extends Controller
         $jumlah = $request->jumlah;
         $total= $harga * $jumlah;
 
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-SPoujZg8TIYwFQGfYez8_M6H';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-Gc4b1QGzzYc6Elv4wi7iDt10';
 
         // Uncomment for production environment
         \Midtrans\Config::$isProduction = false;
@@ -108,7 +108,7 @@ class MidtransController extends Controller
     public function finish(Request $request)
     {
         \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-SPoujZg8TIYwFQGfYez8_M6H';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-Gc4b1QGzzYc6Elv4wi7iDt10';
         $orderId=$request->get('order_id');
         $status = \Midtrans\Transaction::status($orderId);
         $i=0;
@@ -144,7 +144,7 @@ class MidtransController extends Controller
     public function notifikasi(Request $request)
     {
         \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-SPoujZg8TIYwFQGfYez8_M6H';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-Gc4b1QGzzYc6Elv4wi7iDt10';
         $notif = new \Midtrans\Notification();
         $transaction = $notif->transaction_status;
         $transactionid = $notif->transaction_id;
