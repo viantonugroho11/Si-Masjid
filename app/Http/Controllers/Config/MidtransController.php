@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\Kampanye\KampanyeController;
 use App\Http\Controllers\Controller;
 use App\Models\DataKampanye;
 use App\Models\Transaksi;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,10 +104,11 @@ class MidtransController extends Controller
         }
 
     }
+
     public function finish(Request $request)
     {
         \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-ii1gBdtLV-5JFdb11U_lyE1O';
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-SPoujZg8TIYwFQGfYez8_M6H';
         $orderId=$request->get('order_id');
         $status = \Midtrans\Transaction::status($orderId);
         $i=0;
@@ -136,6 +138,79 @@ class MidtransController extends Controller
             return redirect()->route('ziskampanye.index')->with(['success' => 'Alhamdulillah Transaksi Kamu Berhasil']);
         }else{
             return redirect()->route('ziskampanye.index')->with(['success' => 'Alhamdulillah Transaksi Kamu Belum Terselesaikan']);
+        }
+    }
+
+    public function notifikasi(Request $request)
+    {
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-SPoujZg8TIYwFQGfYez8_M6H';
+        $notif = new \Midtrans\Notification();
+        $transaction = $notif->transaction_status;
+        $transactionid = $notif->transaction_id;
+        $transaction_time = $notif->transaction_time;
+        $type = $notif->payment_type;
+        $order_id = $notif->order_id;
+        $fraud = $notif->fraud_status;
+        $jumlah = $notif->gross_amount;
+        if ($transaction == 'capture') {
+            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
+            if ($type == 'credit_card') {
+                if ($fraud == 'challenge') {
+                    // TODO set payment status in merchant's database to 'Challenge by FDS'
+                    // TODO merchant should decide whether this transaction is authorized or not in MAP
+                    echo "Transaction order_id: " . $order_id . " is challenged by FDS";
+                } else {
+                    // TODO set payment status in merchant's database to 'Success'
+                    echo "Transaction order_id: " . $order_id . " successfully captured using " . $type;
+                }
+            }
+        } else if ($transaction == 'settlement') {
+            // TODO set payment status in merchant's database to 'Settlement'
+            $transaksi = Transaksi::where('order_id', '=', $order_id)->first();
+
+            $transaksi->update([
+                'transaction_id' => $transactionid,
+                'payment_type' => $type,
+                'transaction_status' => $transaction
+            ]);
+            echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
+        } else if ($transaction == 'pending') {
+            // TODO set payment status in merchant's database to 'Pending'
+            $transaksi = Transaksi::where('order_id', '=', $order_id)->first();
+            $transaksi->update([
+                'transaction_id' => $transactionid,
+                'payment_type' => $type,
+                'transaction_status' => $transaction
+            ]);
+            echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+        } else if ($transaction == 'deny') {
+            // TODO set payment status in merchant's database to 'Denied'
+            $transaksi = Transaksi::where('order_id', '=', $order_id)->first();
+            $transaksi->update([
+                'transaction_id' => $transactionid,
+                'payment_type' => $type,
+                'transaction_status' => $transaction
+            ]);
+            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
+        } else if ($transaction == 'expire') {
+            // TODO set payment status in merchant's database to 'expire'
+            $transaksi = Transaksi::where('order_id', '=', $order_id)->first();
+            $transaksi->update([
+                'transaction_id' => $transactionid,
+                'payment_type' => $type,
+                'transaction_status' => $transaction
+            ]);
+            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is expired.";
+        } else if ($transaction == 'cancel') {
+            // TODO set payment status in merchant's database to 'Denied'
+            $transaksi = Transaksi::where('order_id', '=', $order_id)->first();
+            $transaksi->update([
+                'transaction_id' => $transactionid,
+                'payment_type' => $type,
+                'transaction_status' => $transaction
+            ]);
+            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is canceled.";
         }
     }
 }
