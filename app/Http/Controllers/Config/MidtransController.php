@@ -33,13 +33,16 @@ class MidtransController extends Controller
         }
         $tanggal = date('ymd');
         $no = "0000";
-        $nourut = Transaksi::max('order_id');
+        $id = Transaksi::max('id');
+        $dataterakhir = Transaksi::where('id',$id)->first();
+        $nourut = $dataterakhir->order_id;
+        // dd($tanggal,$nourut);
         $cektanggal = substr($nourut, 3, 6);
-        // dd($cektanggal);
         $hasil_urut = $tanggal . $no;
         if ($tanggal == $cektanggal) {
             $no_urut = substr($nourut, 3, 10) + 1;
             $hasil = $no_urut + 1;
+            // dd($hasil);
         } else {
             $hasil = $hasil_urut + 1;
         }
@@ -112,7 +115,8 @@ class MidtransController extends Controller
     {
         \Midtrans\Config::$isProduction = false;
         \Midtrans\Config::$serverKey = 'SB-Mid-server-Gc4b1QGzzYc6Elv4wi7iDt10';
-        $orderId=$request->get('order_id');
+        // dd($request->all());
+        $orderId=$request->get('id');
         $status = \Midtrans\Transaction::status($orderId);
         $i=0;
         foreach($status as $k=>$val){
@@ -131,7 +135,8 @@ class MidtransController extends Controller
             }
         }
         // dd($jumlah);
-        $transaksi = Transaksi::where('order_id','=',$orderId)->first();
+        $transaksi = Transaksi::where('order_id','=', $order_id)->first();
+        // dd($order_id);
         $transaksi->update([
             'transaction_id'=>$id_transaksi,
             'payment_type'=>$tipe,
@@ -149,7 +154,9 @@ class MidtransController extends Controller
         \Midtrans\Config::$isProduction = false;
         \Midtrans\Config::$serverKey = 'SB-Mid-server-Gc4b1QGzzYc6Elv4wi7iDt10';
         $notif = new \Midtrans\Notification();
+        dd($notif);
         $transaction = $notif->transaction_status;
+        $fraud = $notif->fraud_status;
         $transactionid = $notif->transaction_id;
         $transaction_time = $notif->transaction_time;
         $type = $notif->payment_type;
@@ -175,6 +182,7 @@ class MidtransController extends Controller
             $transaksi->update([
                 'transaction_id' => $transactionid,
                 'payment_type' => $type,
+                'transaction_time' => $transaction_time,
                 'transaction_status' => $transaction
             ]);
             echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
