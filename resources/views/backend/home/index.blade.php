@@ -65,7 +65,7 @@
             <div class="card card-light-danger">
               <div class="card-body">
                 <p class="mb-4">Jumlah Kas Masjid</p>
-                <p class="fs-30 mb-2">30.000.000</p>
+                <p class="fs-30 mb-2">{{$total}}</p>
                 <p>Total Keseluruhan Kas Masjid</p>
               </div>
             </div>

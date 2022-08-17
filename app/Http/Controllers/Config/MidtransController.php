@@ -93,7 +93,8 @@ class MidtransController extends Controller
             'id_user'=>Auth::user()->id,
             'id_zis'=>$idZis,
             'gross_amount' => $total,
-            'transaction_status'=>"Belum Transaksi"
+            'transaction_status'=>"Belum Transaksi",
+            'type'=>$nameKG
         ]);
 
         try {

@@ -27,7 +27,8 @@ class Transaksi extends Model
         'froud_status',
         'currency',
         'id_user',
-        'id_zis'
+        'id_zis',
+        'type'
     ];
 
     public function getuser()

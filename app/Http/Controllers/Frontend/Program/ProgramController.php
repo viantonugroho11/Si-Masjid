@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Program;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProgramKegiatan;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class ProgramController extends Controller
@@ -17,7 +18,11 @@ class ProgramController extends Controller
     {
         //
         $program = ProgramKegiatan::all();
-        return view('frontend.mainmenu.index', compact('program'));
+        $programcount = ProgramKegiatan::count();
+        $jumlahzis = Transaksi::where('type', '=', 'ZKT')
+        ->where('transaction_status','=','settlement')->count();
+        return view('frontend.mainmenu.index', compact('program', 'programcount', 'jumlahzis'));
+        // return view('frontend.mainmenu.index', compact('program','jumlahzis'));
     }
 
     /**

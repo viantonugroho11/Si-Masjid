@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pemasukan;
+use App\Models\Pengeluaran;
 use App\Models\ShohibulZis;
 use App\Models\Transaksi;
 use App\Models\User;
@@ -30,7 +32,11 @@ class HomeController extends Controller
         $administrators = User::all();
         $jumlah_member = ShohibulZis::all()->count();
         $jumlah_transaksi = Transaksi::all()->count();
-        return view('backend.home.index', compact('administrators', 'jumlah_member','jumlah_transaksi'));
+
+        $total_pemasukan = Pemasukan::sum('jumlah_pemasukan');
+        $total_pengeluaran = Pengeluaran::sum('jumlah_pengeluaran');
+        $total = $total_pemasukan - $total_pengeluaran;
+        return view('backend.home.index', compact('administrators', 'jumlah_member','jumlah_transaksi','total'));
     }
 
 
