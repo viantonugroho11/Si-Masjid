@@ -227,5 +227,5 @@ Route::get('send-mail', function () {
     dd("Email is Sent.");
 });
 
-Route::get('/transaksi/finish', [App\Http\Controllers\Config\MidtransController::class, 'finish'])->name('transaksi.finish');
+Route::post('/transaksi/finish', [App\Http\Controllers\Config\MidtransController::class, 'finish'])->name('transaksi.finish');
 Route::post('/transaksi/notifikasi-handler', [App\Http\Controllers\Config\MidtransController::class, 'notifikasi'])->name('transaksi.notifikasi');
