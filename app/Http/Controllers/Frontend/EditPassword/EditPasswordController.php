@@ -78,8 +78,9 @@ class EditPasswordController extends Controller
         //
         $request->validate([
             'password_lama' => 'required',
-            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:6'
+            'password'=>'min:6|confirmed|required',
+            // 'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            // 'password_confirmation' => 'min:6'
         ]);
 
         if(Hash::check($request->password_lama, Auth::user()->password)){

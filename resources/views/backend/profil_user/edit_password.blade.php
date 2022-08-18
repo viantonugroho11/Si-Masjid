@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Konfirmasi Kata Sandi</label>
-                            <input name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Masukkan Konfirmasi Kata Sandi">
+                            <input name="password_confirmation" type="password" class="form-control" id="password_confirmation" placeholder="Masukkan Konfirmasi Kata Sandi">
                             @error('password_confirmation')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
