@@ -14,11 +14,10 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <form class="forms-sample" action="{{ route('editpassword.update',Auth::user()->id) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form class="forms-sample" action="{{ route('editpassword.update',Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
 
-                        @csrf
-                        @method('PUT')
+                    @csrf
+                    @method('PUT')
 
                         <div class="form-group">
                             <label for="possword_lama">Kata Sandi Lama</label>

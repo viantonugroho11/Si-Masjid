@@ -47,9 +47,9 @@ use Illuminate\Support\Facades\Route;
 // });
 //Pengambilan data dari controller lain
 Route::post('/transaksi',[App\Http\Controllers\Config\MidtransController::class,'store'])->name('transaksi.midtrans');
+Route::resource('editpassword', EditPasswordController::class);
 Route::middleware(['Member','auth'])->group(function () {
     Route::resource('profilmember', ProfilMemberController::class);
-    Route::resource('editpassword', EditPasswordController::class);
     // Route::get('/ziskampanye',[ZisKampanyeController::class,'index'])->name('ziskampanye.index');
     // Route::get('/ziskampanye/{id}',[ZisKampanyeController::class,'show'])->name('ziskampanye.show');
 });
@@ -61,7 +61,10 @@ Route::get('/',[App\Http\Controllers\Frontend\Program\ProgramController::class,'
 Route::resource('/profil-admin',ProfilController::class);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function(){
+    return redirect('/');
+})->name('home');
+
 Route::get('/cetakAll', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakAll'])->name('cetakAll');
 Route::get('/cetakForm', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakForm'])->name('cetakForm');
 Route::get('/cetakKategori', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakKategori'])->name('cetakKategori');
