@@ -14,7 +14,7 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.profil_user.index');
     }
 
     /**
@@ -46,7 +46,7 @@ class ProfilController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('backend.profil_user.edit_password');
     }
 
     /**
@@ -81,6 +81,6 @@ class ProfilController extends Controller
     public function destroy($id)
     {
         //
-        
+
     }
 }

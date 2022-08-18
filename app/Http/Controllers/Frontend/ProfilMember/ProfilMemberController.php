@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfilMemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Member');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -122,5 +126,5 @@ class ProfilMemberController extends Controller
     {
         //
     }
-    
+
 }

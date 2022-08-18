@@ -33,8 +33,8 @@
                         <i class="fa fa-check text-primary"></i>
                     </div>
                     <div class="ps-4">
-                        <h5 class="text-white mb-0">Kas Masjid</h5>
-                        <h1 class="text-white mb-0" data-toggle="counter-up">10000000</h1>
+                        <h5 class="text-white mb-0">Total Yang Disalurkan</h5>
+                        <h1 class="text-white mb-0">@currency($jumlahsalur)</h1>
                     </div>
                 </div>
             </div>

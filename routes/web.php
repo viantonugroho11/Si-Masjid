@@ -11,6 +11,8 @@ use App\Http\Controllers\Backend\LaporanKegiatan\LaporanKegiatanController;
 use App\Http\Controllers\Backend\Pemasukan\PemasukanController;
 use App\Http\Controllers\Backend\Pengeluaran\PengeluaranController;
 use App\Http\Controllers\Backend\ProfilMasjidn\ProfilMasjidController;
+
+use App\Http\Controllers\Backend\Profil\ProfilController;
 use App\Http\Controllers\Backend\ProgramKegiatan\ProgramKegiatanController;
 use App\Http\Controllers\Backend\Riwayat\RiwayatController;
 use App\Http\Controllers\Backend\Salur\SalurController;
@@ -46,6 +48,8 @@ use Illuminate\Support\Facades\Route;
 //Pengambilan data dari controller lain
 Route::post('/transaksi',[App\Http\Controllers\Config\MidtransController::class,'store'])->name('transaksi.midtrans');
 Route::middleware(['Member','auth'])->group(function () {
+    Route::resource('profilmember', ProfilMemberController::class);
+    Route::resource('editpassword', EditPasswordController::class);
     // Route::get('/ziskampanye',[ZisKampanyeController::class,'index'])->name('ziskampanye.index');
     // Route::get('/ziskampanye/{id}',[ZisKampanyeController::class,'show'])->name('ziskampanye.show');
 });
@@ -53,8 +57,8 @@ Route::resource('ziskampanye', ZisKampanyeController::class);
 Route::get('/dashboard',[App\Http\Controllers\Backend\Home\HomeController::class,'index'])->name('dashboard.index');
 Route::get('/zis',[App\Http\Controllers\Frontend\ZisKampanye\ZisKampanyeController::class,'index'])->name('ziskampanye.index');
 Route::get('/',[App\Http\Controllers\Frontend\Program\ProgramController::class,'index'])->name('program.index');
-
-
+// Route::get('/profil-admin',[App\Http\Controllers\Backend\Profil\ProfilController::class,'index'])->name('profil-admin.index');
+Route::resource('/profil-admin',ProfilController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -185,19 +189,18 @@ Route::middleware('auth')->group(function () {
     Route::resource('pemasukan', PemasukanController::class);
     Route::resource('pengeluaran', PengeluaranController::class);
 
-    Route::resource('program', ProgramController::class);
+    // Route::resource('program', ProgramController::class);
     Route::resource('profilmasjid', ProfilMasjidController::class);
     Route::resource('laporankegiatan', LaporanKegiatanController::class);
     Route::resource('laporanzis', LaporanController::class);
     Route::resource('shohibulzis', ShohibulZisController::class);
-    Route::resource('galeri', GaleriController::class);
     Route::resource('riwayat', RiwayatController::class);
     Route::resource('salur', SalurController::class);
     Route::resource('pemasukan/jenis', JenisPemasukanController::class);
     Route::resource('program-kegiatan', ProgramKegiatanController::class);
-    Route::resource('profilmember', ProfilMemberController::class);
-    Route::resource('editpassword', EditPasswordController::class);
+
 });
+Route::resource('galeri', GaleriController::class);
 
 //Route Edit Controller
 Route::get('/datapengurus/edit',function(){

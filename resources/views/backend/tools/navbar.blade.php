@@ -15,11 +15,11 @@
                     {{ Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item">
+                    <a class="dropdown-item" href="{{route('profil-admin.index')}}">
                         <i class="ti-user text-primary"></i>
                         Profil
                     </a>
-                    <a class="dropdown-item">
+                    <a class="dropdown-item" href="{{route('profil-admin.show',Auth::user()->id)}}">
                         <i class="ti-settings text-primary"></i>
                         Ubah Kata Sandi
                     </a>
