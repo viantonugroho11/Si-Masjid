@@ -31,8 +31,8 @@
                                         <tr>
                                             <td>{{ $item->nama_kegiatan }}</td>
                                             <td>{{ $item->tanggal_kegiatan }}</td>
-                                            <td data="{{ $item->lpj_kegiatan }}" download="{{Storage::url('public/lpj_kegiatan/').$item->lpj_kegiatan}}">
-                                            <a class="btn btn-outline-primary btn-sm" href="{{ $item->lpj_kegiatan }}"><i class="mdi mdi-folder-download"></i></a>
+                                            <td data="{{ $item->lpj_kegiatan }}">
+                                            <a class="btn btn-outline-primary btn-sm" download="{{Storage::url('public/lpj_kegiatan/').$item->lpj_kegiatan}}"><i class="mdi mdi-folder-download"></i></a>
                                             </td>
                                             <td>
                                                 <a class="btn btn-outline-primary btn-sm" href="{{route('laporankegiatan.edit',$item->id)}}"><i class="mdi mdi-lead-pencil"></i></a>
