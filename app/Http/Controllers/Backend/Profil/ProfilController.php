@@ -57,7 +57,7 @@ class ProfilController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.profil_user.edit');
     }
 
     /**
@@ -69,7 +69,13 @@ class ProfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+           'alamat_lengkap' => 'required|string|max:191',
+        ]);
+        Auth::user()->update($request->all());
+        return redirect('/dashboard')
     }
 
     /**
