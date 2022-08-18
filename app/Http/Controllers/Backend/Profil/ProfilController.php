@@ -75,7 +75,7 @@ class ProfilController extends Controller
            'alamat_lengkap' => 'required|string|max:191',
         ]);
         Auth::user()->update($request->all());
-        return redirect('/dashboard')
+        return redirect('/dashboard');
     }
 
     /**
