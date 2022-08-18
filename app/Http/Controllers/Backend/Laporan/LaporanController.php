@@ -7,6 +7,7 @@ use App\Models\DataKampanye;
 use App\Models\ProfilMasjid;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use PDF;
 
 class LaporanController extends Controller
 {
@@ -37,12 +38,28 @@ class LaporanController extends Controller
         return view('backend.report_laporanzis.form_cetak_kategori', compact('namaZis'));
     }
 
-    public function cetakKategori($kategoriPrint)
+    public function cetakKategori(Request $request)
     {
         //
+
         // dd(["Cetak : ".$kategoriPrint]);
-        $cetak_kategori = Transaksi::all()->whereBetween('merchant_id',[$kategoriPrint])->last()->get();
-        return view('backend.report_laporanzis.cetak_kategori', compact('cetak_kategori'));
+        $cari = $request->kategoriPrint;
+        // dd($cari);
+        if ($cari == "semua") {
+            $cetakKategori = Transaksi::all();
+            $pdf = PDF::loadview('backend.report_laporanzis.cetak_kategori', compact('cetakKategori'));
+            return $pdf->download('laporan-pegawai-pdf');
+        } else {
+            $cetakKategori = Transaksi::whereHas('getzis', function ($query) use ($cari) {
+                $query->where('nama_kampanye', $cari);
+            })->get();
+            // dd($cetakKategori);
+
+            // $cetak_kategori = Transaksi::all()->whereBetween('merchant_id',[$kategoriPrint])->last()->get();
+            $pdf = PDF::loadview('backend.report_laporanzis.cetak_kategori', compact('cetakKategori'));
+            return $pdf->download('laporan-pegawai-pdf');
+        }
+        // return view('backend.report_laporanzis.cetak_kategori', compact('cetak_kategori'));
     }
 
     /**

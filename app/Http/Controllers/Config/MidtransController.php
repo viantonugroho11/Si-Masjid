@@ -96,7 +96,7 @@ class MidtransController extends Controller
             'id_user'=>Auth::user()->id,
             'id_zis'=>$idZis,
             'gross_amount' => $total,
-            'transaction_status'=>"Belum Transaksi",
+            'transaction_status'=>"Process",
             'type'=>$nameKG
         ]);
 
@@ -154,7 +154,6 @@ class MidtransController extends Controller
         \Midtrans\Config::$isProduction = false;
         \Midtrans\Config::$serverKey = 'SB-Mid-server-Gc4b1QGzzYc6Elv4wi7iDt10';
         $notif = new \Midtrans\Notification();
-        dd($notif);
         $transaction = $notif->transaction_status;
         $fraud = $notif->fraud_status;
         $transactionid = $notif->transaction_id;
@@ -183,7 +182,7 @@ class MidtransController extends Controller
                 'transaction_id' => $transactionid,
                 'payment_type' => $type,
                 'transaction_time' => $transaction_time,
-                'transaction_status' => $transaction
+                'transaction_status' => "success"
             ]);
             echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
         } else if ($transaction == 'pending') {

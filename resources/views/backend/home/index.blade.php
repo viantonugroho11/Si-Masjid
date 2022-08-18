@@ -12,7 +12,7 @@
            <div class="justify-content-end d-flex">
             <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
               <button class="btn btn-sm btn-light bg-white" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-               <i class="mdi mdi-calendar"></i> 20 Agustus 2022
+               <i class="mdi mdi-calendar"></i> {{\Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y')}}
               </button>
             </div>
            </div>
@@ -56,7 +56,7 @@
             <div class="card card-light-blue">
               <div class="card-body">
                 <p class="mb-4">Jumlah Penyaluran ZIS</p>
-                <p class="fs-30 mb-2">1.000.000</p>
+                <p class="fs-30 mb-2">@currency($total_salur)</p>
                 <p>Penyaluran ZIS</p>
               </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="card card-light-danger">
               <div class="card-body">
                 <p class="mb-4">Jumlah Kas Masjid</p>
-                <p class="fs-30 mb-2">{{$total}}</p>
+                <p class="fs-30 mb-2">@currency($total)</p>
                 <p>Total Keseluruhan Kas Masjid</p>
               </div>
             </div>

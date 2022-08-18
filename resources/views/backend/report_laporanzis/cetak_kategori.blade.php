@@ -26,7 +26,7 @@
                 <th>Total</th>
                 <th>Status Transaksi</th>
             </tr>
-            @forelse ($cetak_kategori as $item)
+            @forelse ($cetakKategori as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->merchant_id }}</td>

@@ -60,7 +60,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/cetakAll', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakAll'])->name('cetakAll');
 Route::get('/cetakForm', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakForm'])->name('cetakForm');
-Route::get('/cetakKategori/{kategoriPrint}', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakKategori'])->name('cetakKategori');
+Route::get('/cetakKategori', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakKategori'])->name('cetakKategori');
 
 // Route::get('/inventaris/create',function(){
 //     return view('backend.form_inventaris.index');

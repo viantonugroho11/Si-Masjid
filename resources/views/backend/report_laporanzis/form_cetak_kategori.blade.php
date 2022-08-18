@@ -14,7 +14,7 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <form class="forms-sample">
+                        <form class="forms-sample" method="GET" action="{{route('cetakKategori')}}">
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Pilih Kategori Print</label>
                                 <select name="kategoriPrint" id="kategoriPrint" class="form-control" id="exampleFormControlSelect2">
@@ -30,8 +30,9 @@
                                     </div>
                                 @enderror
                             </div>
-                            <a href="" onclick="this.href='/cetakKategori/'+ document.getElementById('kategoriPrint').value + '/' " target="_blank" class="btn btn-primary">Cetak Kategori</a>
-                            <a class="btn btn-light" href="/laporanzis">Kembali</a>
+                            <button type="submit" class="btn btn-primary mr-2">Cetak</button>
+                            {{-- <a href="" onclick="this.href='/cetakKategori/'+ document.getElementById('kategoriPrint').value + '/' " target="_blank" class="btn btn-primary">Cetak Kategori</a>
+                            <a class="btn btn-light" href="/laporanzis">Kembali</a> --}}
                         </form>
                     </div>
                 </div>
