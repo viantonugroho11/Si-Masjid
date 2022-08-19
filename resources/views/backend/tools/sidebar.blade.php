@@ -70,8 +70,8 @@
                 </a>
                 <div class="collapse" id="laporan-keuangan">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="">Kas Masuk</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Kas Keluar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('report.kasmasuk')}}">Kas Masuk</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('report.kaskeluar')}}">Kas Keluar</a></li>
                     </ul>
                 </div>
             </li>

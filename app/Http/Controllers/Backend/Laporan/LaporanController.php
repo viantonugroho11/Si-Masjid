@@ -57,7 +57,7 @@ class LaporanController extends Controller
 
             // $cetak_kategori = Transaksi::all()->whereBetween('merchant_id',[$kategoriPrint])->last()->get();
             $pdf = PDF::loadview('backend.report_laporanzis.cetak_kategori', compact('cetakKategori'));
-            return $pdf->download('laporan-pegawai-pdf');
+            return $pdf->download('laporan-transaksi-pdf.pdf');
         }
         // return view('backend.report_laporanzis.cetak_kategori', compact('cetak_kategori'));
     }

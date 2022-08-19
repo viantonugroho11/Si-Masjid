@@ -69,6 +69,14 @@ Route::get('/cetakAll', [App\Http\Controllers\Backend\Laporan\LaporanController:
 Route::get('/cetakForm', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakForm'])->name('cetakForm');
 Route::get('/cetakKategori', [App\Http\Controllers\Backend\Laporan\LaporanController::class, 'cetakKategori'])->name('cetakKategori');
 
+Route::get('/report/kasmasuk',[App\Http\Controllers\Backend\Report\ReportController::class,'kasmasuk'])->name('report.kasmasuk');
+Route::get('/report/kasmasjid',[App\Http\Controllers\Backend\Report\ReportController::class,'kasmasjid'])->name('report.kasmasjid');
+Route::get('/report/kaskeluar',[App\Http\Controllers\Backend\Report\ReportController::class,'kaskeluar'])->name('report.kaskeluar');
+
+
+Route::get('/report/kasmasuk/cetak', [App\Http\Controllers\Backend\Report\ReportController::class, 'kasmasuk_pdf'])->name('report.kasmasuk_pdf');
+Route::get('/report/kaskeluar/cetak', [App\Http\Controllers\Backend\Report\ReportController::class, 'kaskeluar_pdf'])->name('report.kaskeluar_pdf');
+
 // Route::get('/inventaris/create',function(){
 //     return view('backend.form_inventaris.index');
 // });
@@ -235,3 +243,4 @@ Route::get('send-mail', function () {
 
 Route::post('/transaksi/finish', [App\Http\Controllers\Config\MidtransController::class, 'finish'])->name('transaksi.finish');
 Route::post('/transaksi/notifikasi-handler', [App\Http\Controllers\Config\MidtransController::class, 'notifikasi'])->name('transaksi.notifikasi');
+
