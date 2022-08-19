@@ -89,4 +89,10 @@ class ZisKampanyeController extends Controller
     {
         //
     }
+
+    public function filter($id)
+    {
+        $ziskampanyes = DataKampanye::where('kategori', $id)->get();
+        return view('frontend.zis.index', compact('ziskampanyes'));
+    }
 }

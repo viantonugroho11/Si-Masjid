@@ -56,6 +56,9 @@ Route::middleware(['Member','auth'])->group(function () {
 Route::resource('ziskampanye', ZisKampanyeController::class);
 Route::get('/dashboard',[App\Http\Controllers\Backend\Home\HomeController::class,'index'])->name('dashboard.index');
 Route::get('/zis',[App\Http\Controllers\Frontend\ZisKampanye\ZisKampanyeController::class,'index'])->name('ziskampanye.index');
+
+Route::get('/zis/{id}',[App\Http\Controllers\Frontend\ZisKampanye\ZisKampanyeController::class,'filter'])->name('ziskampanye.filter');
+
 Route::get('/',[App\Http\Controllers\Frontend\Program\ProgramController::class,'index'])->name('program.index');
 // Route::get('/profil-admin',[App\Http\Controllers\Backend\Profil\ProfilController::class,'index'])->name('profil-admin.index');
 Route::resource('/profil-admin',ProfilController::class);

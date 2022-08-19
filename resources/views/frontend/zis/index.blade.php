@@ -20,18 +20,26 @@
             <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline mb-5" id="portfolio-flters">
+                        <a href="/zis">
                         <li class="btn btn-outline-primary py-2 px-4 active" data-filter="*">
                             <i class="fa fa-star me-2"></i>Semua
                         </li>
+                        </a>
+                        <a href="{{route('ziskampanye.filter','zakat')}}">
                         <li class="btn btn-outline-primary py-2 px-4" data-filter=".first">
                             <i class="fa fa-heart me-2"></i>Zakat
                         </li>
+                        </a>
+                        <a href="{{route('ziskampanye.filter','Infaq')}}">
                         <li class="btn btn-outline-primary py-2 px-4" data-filter=".second">
                             <i class="fa fa-heart me-2"></i>Infaq
                         </li>
+                        </a>
+                        <a href="{{route('ziskampanye.filter','Shadaqah')}}">
                         <li class="btn btn-outline-primary py-2 px-4" data-filter=".second">
                             <i class="fa fa-heart me-2"></i>Shadaqah
                         </li>
+                        </a>
                     </ul>
                 </div>
             </div>
